@@ -1,0 +1,12 @@
+normal on = 1 | on = 2: on
+and in = on & in > 0: on
+random random(0, 2) = 1: on
+xor in % 2 = 0: on
+
+rule := ID bool_expr ":" state
+state := "on" | "off"
+bool_expr := int_expr comparison_op int_expr | bool_expr bin_bool_op bool_expr | "!" "("bool_expr")"
+bin_bool_op = "|" | "&" 
+int_expr := term "+" term | term "-" term | "-" int_expr
+term := num_literal | term * term | "(" int_expr ")" | term "/" term | term "%" term
+num_literal := "on" | "off" | "in"
